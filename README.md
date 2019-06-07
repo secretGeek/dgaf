@@ -3,7 +3,7 @@ dreams-goals-actions-fears
 
 This is a simple tool i've used for over a decade, whenever i find myself fully blocked 🧱.
 
-[try it online](https://secretgeek.github.io/dgaf/dgaf.html)
+## [**try it online**](https://secretgeek.github.io/dgaf/dgaf.html)
 
 Until now I would always recreate this on paper 📝 anytime I needed it.
 
@@ -18,7 +18,7 @@ There are four boxes where you dump your thoughts:
 
 You can enter things in any order, as they occur to you.
 
-**Dreams** 🌈 is for write a top-level, wildly impractical vision of what you hope to achieve. It is about picturing a successfull end state.
+**Dreams** 🌈 is where you write a top-level, wildly impractical vision of what you hope to achieve. It is about picturing a successfull end state.
 
 **Goals** 🌄 are more targeted, realistic than "dreams" - they might even fit the famous smart model and be "specific, measurable, achievable, realistic, time-focused"
 
