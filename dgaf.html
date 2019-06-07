@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DGAF: Dreams Goals Actions Fears</title>
+<style>
+html, body, table { 
+  height:100%; 
+  width:100%;
+  margin:0;
+  padding:0
+}
+table,tr,td { 
+  border:5px solid #AAA; 
+  text-align:center;
+  vertical-align:top
+}
+table { 
+  border-collapse: collapse; 
+  font-size:2rem;
+  color:#666;
+  font-family:sans-serif
+}
+#dreams-cell { 
+  height:33%;
+  width:66%;
+  max-width:66%;
+}
+#goals-cell,#actions-cell { 
+  width:33%;
+  max-width:33%;
+}
+#fears-cell { 
+  width:34%;
+  max-width:34%;
+}
+#dreams {
+  height:calc(100% - 3rem - 20px);
+}
+.list { 
+  clear:both;
+  display:block;
+  height:calc(100% - 3rem - 30px);
+  max-width:calc(100% - 30px);
+  margin:15px;
+  padding-top:7px;
+  background-image: url("bg_line24.png");
+  font-size:16px;
+  line-height:24px;
+  text-align:left;
+  font-weight:100;
+}
+
+.box { 
+  position:absolute;
+  top:100%;
+  left:100%;
+  transform: translate(calc(-100% - 20px),calc(-100% - 25px));
+}
+button { 
+  background-color:white;
+  border-radius:50%;
+  padding:5px;
+  border:none;
+  box-shadow:0 0 5px #666;
+  margin:5px;
+  opacity:0.6;
+}
+button:hover {
+  opacity:1.0;
+  cursor:pointer;
+}
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+	background-color:white;
+}
+body {
+    background:#FCFCFC;
+}
+</style>
+</head>
+<body>
+<table>
+<tr>
+<td id='dreams-cell' colspan=2>dreams 🌈 <span id='dreams' class='list' contenteditable=true></span></td>
+<td id='fears-cell' rowspan=2>fears 💀<span id='fears' class='list' contenteditable=true></span></td>
+</tr>
+<tr>
+<td id='goals-cell' >goals 🌄<span id='goals' class='list' contenteditable=true></span></td>
+<td id='actions-cell' >actions ✅<span id='actions' class='list' contenteditable=true></span></td>
+</tr>
+</table>
+<div class="boxContainer">
+    <div class="box">
+	<button onclick='clear();' title='clear' >🧹 clear</button>
+	<button onclick='help();' title='help' >🤷‍♀️ help</button>
+</div>
+</div>
+
+<script>
+function save() {
+	setItem('dreams');
+	setItem('goals');
+	setItem('actions');
+	setItem('fears');
+}
+
+function load() {
+	$id("dreams").innerText = localStorage.getItem('dreams');
+	$id("goals").innerText = localStorage.getItem('goals');
+	$id("actions").innerText = localStorage.getItem('actions');
+	$id("fears").innerText = localStorage.getItem('fears');
+}
+function clear() {
+	$id("dreams").innerText = '';
+	$id("goals").innerText = '';
+	$id("actions").innerText = '';
+	$id("fears").innerText = '';
+	save();
+	load();
+}
+function $(selector) {
+	return document.querySelectorAll(selector);
+}
+function $id(id) {
+	return document.getElementById(id);
+}
+start();
+
+function start() {
+	load();
+	$id("dreams").addEventListener("input", () => setItem('dreams'));
+	$id("goals").addEventListener("input", () => setItem('goals'));
+	$id("actions").addEventListener("input", () => setItem('actions'));
+	$id("fears").addEventListener("input", () => setItem('fears'));
+}
+function setItem(id) {
+	localStorage.setItem(id, $id(id).innerText);
+}
+</script>
+</body>
+</html>
