@@ -3,6 +3,8 @@ dreams-goals-actions-fears
 
 This is a simple tool i've used for over a decade, whenever i find myself fully blocked 🧱.
 
+[try it online](https://secretgeek.github.io/dgaf/dgaf.html)
+
 Until now I would always recreate this on paper 📝 anytime I needed it.
 
 This version is an "offline-first" standalone webpage you can download locally. 
