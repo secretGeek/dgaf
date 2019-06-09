@@ -9,7 +9,7 @@ html, body, table {
   margin:0;
   padding:0
 }
-table,tr,td { 
+table, tr, td { 
   border:5px solid #AAA; 
   text-align:center;
   vertical-align:top
@@ -25,7 +25,7 @@ table {
   width:66%;
   max-width:66%;
 }
-#goals-cell,#actions-cell { 
+#goals-cell, #actions-cell { 
   width:33%;
   max-width:33%;
 }
@@ -49,7 +49,6 @@ table {
   text-align:left;
   font-weight:100;
 }
-
 .box { 
   position:absolute;
   top:100%;
@@ -70,71 +69,132 @@ button:hover {
   cursor:pointer;
 }
 [contenteditable]:focus {
-    outline: 0px solid transparent;
-	background-color:white;
+  outline: 0px solid transparent;
+  background-color:white;
 }
 body {
-    background:#FCFCFC;
+  background:#FCFCFC;
+}
+.help {
+  font-size:8pt;
+  position:absolute;
+  background:#FFC;
+  padding:5px;
+  white-space:wrap;
+  box-shadow:0 0 5px #CCC;  
+  display:inline-block;
+  max-width:100px;
+  margin-top:7px;
+}
+.help:hover {
+  cursor:pointer;
+}
+.help_dreams {
+  left:calc(66%);
+  transform: translate(calc(-100% - 20px),0);
+}
+.help_goals {
+  left:calc(33%);
+  transform: translate(calc(-100% - 20px),0);
+}
+.help_actions {
+  left:calc(66%);
+  transform: translate(calc(-100% - 20px),0);
+}
+.help_fears {
+  left:calc(100%);
+  transform: translate(calc(-100% - 20px),0);
+}
+.hide {
+  display:none;
 }
 </style>
 </head>
 <body>
 <table>
 <tr>
-<td id='dreams-cell' colspan=2>dreams 🌈 <span id='dreams' class='list' contenteditable=true></span></td>
-<td id='fears-cell' rowspan=2>fears 💀<span id='fears' class='list' contenteditable=true></span></td>
+<td id='dreams-cell' colspan=2>dreams 🌈<span class='help_dreams help hide'>write your dreams: vague wonderful things you envision</span> <span id='dreams' class='list' contenteditable=true></span></td>
+<td id='fears-cell' rowspan=2>fears 💀<span class='help_fears help hide'>intrusive worries that interfere with dreams/goals/actions</span><span id='fears' class='list' contenteditable=true></span></td>
 </tr>
 <tr>
-<td id='goals-cell' >goals 🌄<span id='goals' class='list' contenteditable=true></span></td>
-<td id='actions-cell' >actions ✅<span id='actions' class='list' contenteditable=true></span></td>
+<td id='goals-cell' >goals 🌄<span class='help_golas help hide'>Specific Measurable Achieveable Realistic Timely</span><span id='goals' class='list' contenteditable=true></span></td>
+<td id='actions-cell' >actions ✅<span class='help_actions help hide'>tiny actionable steps toward your goals</span><span id='actions' class='list' contenteditable=true></span></td>
 </tr>
 </table>
 <div class="boxContainer">
-    <div class="box">
-	<button onclick='clear();' title='clear' >🧹 clear</button>
-	<button onclick='help();' title='help' >🤷‍♀️ help</button>
+  <div class="box">
+    <button onclick='undo();' title='undo clear (restore page)' id='undo' class='hide' >🤭 undo</button>
+    <button onclick='clear1();' title='clear' >🧹 clear</button>
+    <button onclick='help();' title='help' >🤷‍♀️ help</button>
+  </div>
 </div>
-</div>
-
 <script>
+var changes = 0;
+const lists = ["dreams","goals","actions","fears"];
+
 function save() {
-	setItem('dreams');
-	setItem('goals');
-	setItem('actions');
-	setItem('fears');
+	for(const l of lists) { setItem(l);}
 }
 
 function load() {
-	$id("dreams").innerText = localStorage.getItem('dreams');
-	$id("goals").innerText = localStorage.getItem('goals');
-	$id("actions").innerText = localStorage.getItem('actions');
-	$id("fears").innerText = localStorage.getItem('fears');
+	for(const l of lists) { 
+		$id(l).innerText = localStorage.getItem(l);
+	}
 }
-function clear() {
-	$id("dreams").innerText = '';
-	$id("goals").innerText = '';
-	$id("actions").innerText = '';
-	$id("fears").innerText = '';
+var prev = {};
+
+function clear1() {
+	prev = {};
+	for(const l of lists) { 
+		prev[l] = $id(l).innerText;
+		$id(l).innerText = '';
+	}
 	save();
 	load();
+	changes = 0;
+	$id('undo').classList.remove("hide");
 }
+
+function undo() {
+	for(const l of lists) { 
+		$id(l).innerText = prev[l];
+	}
+	changes = 0;
+}
+
 function $(selector) {
 	return document.querySelectorAll(selector);
 }
+
 function $id(id) {
 	return document.getElementById(id);
 }
+
 start();
 
 function start() {
 	load();
-	$id("dreams").addEventListener("input", () => setItem('dreams'));
-	$id("goals").addEventListener("input", () => setItem('goals'));
-	$id("actions").addEventListener("input", () => setItem('actions'));
-	$id("fears").addEventListener("input", () => setItem('fears'));
+	for(const l of lists) { 
+		$id(l).addEventListener("input", () => setItem(l));
+	}
+	for(const hell of $(".help")) { hell.addEventListener("click", () => toggleHelp());}
 }
+
 function setItem(id) {
 	localStorage.setItem(id, $id(id).innerText);
+	if (++changes > 30) {
+		$id('undo').classList.add("hide");
+	}
+}
+
+function help() {
+	toggleHelp();
+}
+
+function toggleHelp() {
+	for (const item of $('.help')) {
+		item.classList.toggle('hide');
+	}
 }
 </script>
 </body>
