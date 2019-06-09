@@ -105,6 +105,9 @@ body {
   left:calc(100%);
   transform: translate(calc(-100% - 20px),0);
 }
+.help_1 {
+  left:calc(0% + 20px);
+}
 .hide {
   display:none;
 }
@@ -113,11 +116,11 @@ body {
 <body>
 <table>
 <tr>
-<td id='dreams-cell' colspan=2>dreams 🌈<span class='help_dreams help hide'>write your dreams: vague wonderful things you envision</span> <span id='dreams' class='list' contenteditable=true></span></td>
+<td id='dreams-cell' colspan=2><span class='help_1 help hide'>Click to add your own content.</span>dreams 🌈<span class='help_dreams help hide'>write your dreams: vague wonderful things you envision</span> <span id='dreams' class='list' contenteditable=true></span></td>
 <td id='fears-cell' rowspan=2>fears 💀<span class='help_fears help hide'>intrusive worries that interfere with dreams/goals/actions</span><span id='fears' class='list' contenteditable=true></span></td>
 </tr>
 <tr>
-<td id='goals-cell' >goals 🌄<span class='help_golas help hide'>Specific Measurable Achieveable Realistic Timely</span><span id='goals' class='list' contenteditable=true></span></td>
+<td id='goals-cell' >goals 🌄<span class='help_goals help hide'>Specific Measurable Achieveable Realistic Timely</span><span id='goals' class='list' contenteditable=true></span></td>
 <td id='actions-cell' >actions ✅<span class='help_actions help hide'>tiny actionable steps toward your goals</span><span id='actions' class='list' contenteditable=true></span></td>
 </tr>
 </table>
