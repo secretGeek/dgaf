@@ -111,6 +111,15 @@ body {
 .hide {
   display:none;
 }
+@media print {
+	body {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+	@page {
+		size:landscape;
+	}
+}
 </style>
 </head>
 <body>
