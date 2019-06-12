@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>DGAF: Dreams Goals Actions Fears</title>
 <style>
 html, body, table { 
@@ -169,7 +170,8 @@ function save() {
 
 function load() {
 	for(const l of lists) { 
-		$id(l).value = localStorage.getItem(l);
+		var value = localStorage.getItem(l);
+		if (value != null && value != undefined) $id(l).value = value;
 	}
 }
 var prev = {};
