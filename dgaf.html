@@ -18,7 +18,7 @@ table {
   border-collapse: collapse; 
   font-size:2rem;
   color:#666;
-  font-family:sans-serif
+  font-family:sans-serif;
 }
 #dreams-cell { 
   height:33%;
@@ -41,6 +41,7 @@ table {
   display:block;
   height:calc(100% - 3rem - 30px);
   max-width:calc(100% - 30px);
+  width:calc(100% - 30px);
   margin:15px;
   padding-top:7px;
   background-image: url("bg_line24.png");
@@ -48,6 +49,9 @@ table {
   line-height:24px;
   text-align:left;
   font-weight:100;
+  border:none;
+  font-family:monospace;
+  letter-spacing:-0.05ch;
 }
 .box { 
   position:absolute;
@@ -68,7 +72,14 @@ button:hover {
   opacity:1.0;
   cursor:pointer;
 }
-[contenteditable]:focus {
+button:focus {
+  outline: 0px solid transparent;
+  box-shadow:0 0 5px #68F,0 0 3px #68F;
+  /*background-color:white;*/
+}
+
+
+.list:focus {
   outline: 0px solid transparent;
   background-color:white;
 }
@@ -125,12 +136,20 @@ body {
 <body>
 <table>
 <tr>
-<td id='dreams-cell' colspan=2><span class='help_1 help hide'>Click to add your own content.</span>dreams 🌈<span class='help_dreams help hide'>write your dreams: vague wonderful things you envision</span> <span id='dreams' class='list' contenteditable=true></span></td>
-<td id='fears-cell' rowspan=2>fears 💀<span class='help_fears help hide'>intrusive worries that interfere with dreams/goals/actions</span><span id='fears' class='list' contenteditable=true></span></td>
+<td id='dreams-cell' colspan=2>
+<span class='help_1 help hide'>Click to add your own content.</span>
+dreams 🌈
+<span class='help_dreams help hide'>write your dreams: vague wonderful things you envision</span>
+<textarea id='dreams' class='list'></textarea></td></td>
+<td id='fears-cell' rowspan=2>fears 💀
+<span class='help_fears help hide'>intrusive worries that interfere with dreams/goals/actions</span>
+<textarea id='fears' class='list'></textarea></td>
 </tr>
 <tr>
-<td id='goals-cell' >goals 🌄<span class='help_goals help hide'>Specific Measurable Achieveable Realistic Timely</span><span id='goals' class='list' contenteditable=true></span></td>
-<td id='actions-cell' >actions ✅<span class='help_actions help hide'>tiny actionable steps toward your goals</span><span id='actions' class='list' contenteditable=true></span></td>
+<td id='goals-cell' >goals 🌄<span class='help_goals help hide'>Specific Measurable Achieveable Realistic Timely</span>
+<textarea id='goals' class='list'></textarea></td>
+<td id='actions-cell' >actions ✅<span class='help_actions help hide'>tiny actionable steps toward your goals</span>
+<textarea id='actions' class='list'></textarea></td>
 </tr>
 </table>
 <div class="boxContainer">
@@ -150,7 +169,7 @@ function save() {
 
 function load() {
 	for(const l of lists) { 
-		$id(l).innerText = localStorage.getItem(l);
+		$id(l).value = localStorage.getItem(l);
 	}
 }
 var prev = {};
@@ -158,8 +177,8 @@ var prev = {};
 function clear1() {
 	prev = {};
 	for(const l of lists) { 
-		prev[l] = $id(l).innerText;
-		$id(l).innerText = '';
+		prev[l] = $id(l).value;
+		$id(l).value = '';
 	}
 	save();
 	load();
@@ -169,7 +188,7 @@ function clear1() {
 
 function undo() {
 	for(const l of lists) { 
-		$id(l).innerText = prev[l];
+		$id(l).value = prev[l];
 	}
 	changes = 0;
 }
@@ -193,7 +212,7 @@ function start() {
 }
 
 function setItem(id) {
-	localStorage.setItem(id, $id(id).innerText);
+	localStorage.setItem(id, $id(id).value);
 	if (++changes > 30) {
 		$id('undo').classList.add("hide");
 	}
