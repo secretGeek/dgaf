@@ -1,5 +1,4 @@
-# dgaf
-dreams-goals-actions-fears
+# dgaf - dreams-goals-actions-fears
 
 This is a simple tool i've used for over a decade, whenever i find myself fully blocked 🧱.
 

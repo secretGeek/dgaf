@@ -1,0 +1,5 @@
+browse -url https://dgaf.secretgeek.net
+n .\README.md
+.\index.html
+code . .\index.html
+todo: cat .\TODO.md

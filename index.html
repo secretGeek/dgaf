@@ -4,6 +4,56 @@
 <meta charset="UTF-8">
 <title>DGAF: Dreams Goals Actions Fears</title>
 <style>
+
+:root {
+  --body-width: 80ch;
+  --table:#666;
+  --table-border:#AAA; 
+  --button-bg: white;
+  --button:#000;
+  --button-hover:#000;
+  --button-focus:#000;
+  --button-shadow:#666;
+  --body-bg:#FCFCFC;
+  --help-bg:#FFC;
+  --help-shadow:#CCC;
+  --button-focus-shadow-1: #68F;
+  --button-focus-shadow-2: #68F;
+  --textarea:#000;
+  --list-stripe:#CCC;
+  --help-shadow2:#CCC;
+  /*
+  Does nothing to images. But dark mode may invert some.
+  */
+}
+* {
+  transition: 0.30s ease-in-out;
+}
+/* this @media query will apply to those who have
+	 chosen a dark scheme on their device. */
+   @media (prefers-color-scheme: dark) { 
+  :root {
+    --table:#EEE; /* from 666 */
+    --table-border:#444; /* from AAA */ 
+    --button-bg: #000; /* from FFF */
+    --button-shadow:#EEE; /* from 666 */
+    --body-bg:#161616;
+    --help-bg: #063e4b;
+    --help-shadow:#CCC;
+    --button-focus-shadow-1:#DDD;  /*from 68F */
+    --button-focus-shadow-2:#DDD;  /*from 68F */
+    --button:#E4E4E4; /* from 000 */
+    --button-hover:#E4E4E4; /* from 000 */
+    --button-focus:#E4E4E4; /* from 000 */
+    --button-hover-bg: #063e4b;
+    --textarea:#E1E1E1;
+    --list-stripe:#333; /* from CCC */
+    --help-shadow2:#000;
+  }
+  textarea.list {background-image: url("bg_line24d.png");}
+  .emojis { opacity:60%; }
+}
+
 html, body, table { 
   height:100%; 
   width:100%;
@@ -11,14 +61,14 @@ html, body, table {
   padding:0
 }
 table, tr, td { 
-  border:5px solid #AAA; 
+  border:5px solid var(--table-border);
   text-align:center;
   vertical-align:top
 }
 table { 
   border-collapse: collapse; 
   font-size:2rem;
-  color:#666;
+  color: var(--table);
   font-family:sans-serif;
 }
 #dreams-cell { 
@@ -37,6 +87,7 @@ table {
 #dreams {
   height:calc(100% - 3rem - 20px);
 }
+
 .list { 
   clear:both;
   display:block;
@@ -61,44 +112,95 @@ table {
   transform: translate(calc(-100% - 20px),calc(-100% - 25px));
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
 button { 
-  background-color:white;
+  background-color:var(--button-bg);
   border-radius:50%;
   padding:5px;
   border:none;
-  box-shadow:0 0 5px #666;
+  box-shadow:0 0 5px var(--button-shadow);
   margin:5px;
   opacity:0.6;
-}
-button:hover {
-  opacity:1.0;
-  cursor:pointer;
-}
-button:focus {
-  outline: 0px solid transparent;
-  box-shadow:0 0 5px #68F,0 0 3px #68F;
-  /*background-color:white;*/
+  color:var(--button);
+  background-color:var(--button-bg); /* 000  #063e4b;   */
 }
 
+button:hover, #help_button.active {
+  opacity:1.0;
+  cursor:pointer;
+  color:var(--button-hover);
+  background-color:var(--button-hover-bg); /* 000  #063e4b;   */
+}
+
+button:focus, #help_button.active {
+  outline: 0px solid transparent;
+  box-shadow:0 0 5px var(--button-focus-shadow-1), 0 0 3px var(--button-focus-shadow-2);
+  /*background-color:white;*/
+  color:var(--button-focus);
+}
 
 .list:focus {
   outline: 0px solid transparent;
-  background-color:white;
+  background-color:var(--body-bg);
 }
+
 body,textarea {
-  background:#FCFCFC;
+  background:var(--body-bg);
+  color:var(--textarea);
 }
+
+.help_1 {--help-bg-delay:0s;--help-bg-delay-out:0.45s;} 
+.help_dreams {--help-bg-delay:0.15s;--help-bg-delay-out:0.35s;} 
+.help_actions {--help-bg-delay:0.25s;--help-bg-delay-out:0.25s;} 
+.help_fears {--help-bg-delay:0.35s;--help-bg-delay-out:0.15s;} 
+.help_goals {--help-bg-delay:0.45s;--help-bg-delay-out:0s;} 
+.help:active {--help-bg-delay-out:0s;}
+
+.help::after {
+  cursor:default;
+  opacity:0;
+  content:"\00D7"; /* little x \00D7 */
+  position:absolute;
+  right:0.25ch;
+  top:0ch;
+  text-shadow:1 1 2px var(--button-shadow),2 2 3px var(--button-shadow);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.help:hover::after {
+  opacity:1.0;
+  cursor:pointer;
+}
+
+.help.hide:hover {
+cursor:default;
+}
+
+.hideable, .help {
+   opacity:1.0;
+   transition: opacity 0.5s ease-in-out var(--help-bg-delay), visibility 0s ease-in-out 0s;
+   visibility:inherit;
+}
+
+.hideable.hide, .help.hide {
+  opacity:0;
+  transition: opacity 0.5s ease-in-out var(--help-bg-delay-out), visibility 0s ease-in-out 1.0s;
+  visibility:hidden;
+}
+
 .help {
   font-size:8pt;
   position:absolute;
-  background:#FFC;
+  background:var(--help-bg);
   padding:5px;
   white-space:wrap;
-  box-shadow:0 0 5px #CCC;  
+  box-shadow:0 0 5px var(--help-shadow), 0 0 10px var(--help-shadow2), 0 0 12px var(--help-shadow2), 0 0 14px var(--help-shadow2);
   display:inline-block;
   max-width:100px;
   margin-top:7px;
+  border-radius:5px; /* corner radius should be at least the size of the shadow! */
 }
+
 .help:hover {
   cursor:pointer;
 }
@@ -122,7 +224,8 @@ body,textarea {
   left:calc(0% + 20px);
 }
 .hide {
-  display:none;
+  opacity:0%;
+  
 }
 @media print {
 	body {
@@ -138,27 +241,30 @@ body,textarea {
 <body>
 <table>
 <tr>
+
 <td id='dreams-cell' colspan=2>
-<span class='help_1 help hide'>Click to add your own content.</span>
-dreams 🌈
+<span class='help_1 help hide'>Click anywhere to add content.</span>
+dreams <span class="emojis">🌈</span>
+
 <span class='help_dreams help hide'>write your dreams: vague wonderful things you envision</span>
-<textarea id='dreams' class='list'></textarea></td></td>
-<td id='fears-cell' rowspan=2>fears 💀
+<textarea id='dreams' class='list'></textarea>
+</td></td>
+<td id='fears-cell' rowspan=2>fears <span class="emojis">💀</span>
 <span class='help_fears help hide'>intrusive worries that interfere with dreams/goals/actions</span>
 <textarea id='fears' class='list'></textarea></td>
 </tr>
 <tr>
-<td id='goals-cell' >goals 🌄<span class='help_goals help hide'>Specific Measurable Achieveable Realistic Timely</span>
+<td id='goals-cell' >goals <span class='emojis'>🌄</span><span class='help_goals help hide'>Specific Measurable Achieveable Realistic Timely</span>
 <textarea id='goals' class='list'></textarea></td>
-<td id='actions-cell' >actions ✅<span class='help_actions help hide'>tiny actionable steps toward your goals</span>
+<td id='actions-cell' >actions <span class='emojis'>✅</span><span class='help_actions help hide'>tiny actionable steps toward your goals</span>
 <textarea id='actions' class='list'></textarea></td>
 </tr>
 </table>
 <div class="boxContainer">
   <div class="box">
-    <button onclick='undo();' title='undo clear (restore page)' id='undo' class='hide' >🤭 undo</button>
+    <button onclick='undo();' title='undo clear (restore page) hideable' id='undo' class='hide' >🤭 undo</button>
     <button onclick='clear1();' title='clear' >🧹 clear</button>
-    <button onclick='help();' title='help' >🤷‍♀️ help</button>
+    <button onclick='help();' title='help' id="help_button" >🤷‍♀️ help</button>
   </div>
 </div>
 <script>
@@ -228,7 +334,9 @@ function help() {
 function toggleHelp() {
 	for (const item of $('.help')) {
 		item.classList.toggle('hide');
+    
 	}
+  $id("help_button").classList.toggle('active');
 }
 </script>
 </body>
