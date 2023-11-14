@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>DGAF: Dreams Goals Actions Fears</title>
+<!-- 
+
+- I've been using varieties of this since around 1997.
+- I first put a version online around 2002 -- https://wiki.c2.com/?ListYourWayOutOfStuckness
+- And blogged about it in June 2004 -- https://secretgeek.net/procrastless
+- And it peaked when Merlin Mann's "43 Folders" blogged about it in October 2004 -- https://www.43folders.com/2004/10/24/fast-way-to-get-unstuck
+- And I blogged on it again in Nov 2004. https://secretgeek.net/stuckness_delicious
+- Looks like I made this subdomain'd version around 2019
+- And I've added dark mode in 2023.
+
+-->
 <style>
 
 :root {
@@ -34,7 +45,7 @@
    @media (prefers-color-scheme: dark) { 
   :root {
     --table:#EEE; /* from 666 */
-    --table-border:#444; /* from AAA */ 
+    --table-border:#001; /* from AAA */ 
     --button-bg: #000; /* from FFF */
     --button-shadow:#EEE; /* from 666 */
     --body-bg:#161616;
@@ -247,17 +258,22 @@ cursor:default;
 dreams <span class="emojis">🌈</span>
 
 <span class='help_dreams help hide'>write your dreams: vague wonderful things you envision</span>
-<textarea id='dreams' class='list'></textarea>
+<textarea id='dreams' class='list' placeholder="- Vague, ambitious, long-term, or delicious: your goals go here."></textarea>
 </td></td>
 <td id='fears-cell' rowspan=2>fears <span class="emojis">💀</span>
 <span class='help_fears help hide'>intrusive worries that interfere with dreams/goals/actions</span>
-<textarea id='fears' class='list'></textarea></td>
+<textarea id='fears' class='list' placeholder="- what's stopping you?
+- what are you afraid of?
+- what questions are blocking you?
+- what are you avoiding?
+- what are you resiting?"></textarea></td>
 </tr>
 <tr>
 <td id='goals-cell' >goals <span class='emojis'>🌄</span><span class='help_goals help hide'>Specific Measurable Achieveable Realistic Timely</span>
-<textarea id='goals' class='list'></textarea></td>
+<textarea id='goals' class='list' placeholder="- goals that are specific, measurable, achievable, realistic, timely"></textarea></td>
 <td id='actions-cell' >actions <span class='emojis'>✅</span><span class='help_actions help hide'>tiny actionable steps toward your goals</span>
-<textarea id='actions' class='list'></textarea></td>
+<textarea id='actions' class='list' placeholder="- Specific steps you must do now
+- To complete your specific goals"></textarea></td>
 </tr>
 </table>
 <div class="boxContainer">
