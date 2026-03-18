@@ -33,23 +33,17 @@
   --textarea:#000;
   --list-stripe:#CCC;
   --help-shadow2:#CCC;
-  /*
-  Does nothing to images. But dark mode may invert some.
-  */
 }
 * {
   transition: 0.30s ease-in-out;
 }
-/* this @media query will apply to those who have
-	 chosen a dark scheme on their device.
-It's temporarily disabled because i found the dark mode TOO dark! */
    @media (prefers-color-scheme: xdark) { 
   :root {
-    --table:#EEE; /* from 666 */
+    --table:#CCC; /* from 666 */
     --table-border:#001; /* from AAA */ 
     --button-bg: #000; /* from FFF */
     --button-shadow:#EEE; /* from 666 */
-    --body-bg:#161616;
+    --body-bg:#222222;
     --help-bg: #063e4b;
     --help-shadow:#CCC;
     --button-focus-shadow-1:#DDD;  /*from 68F */
@@ -58,19 +52,22 @@ It's temporarily disabled because i found the dark mode TOO dark! */
     --button-hover:#E4E4E4; /* from 000 */
     --button-focus:#E4E4E4; /* from 000 */
     --button-hover-bg: #063e4b;
-    --textarea:#E1E1E1;
+    --textarea:#C1C1C1;
     --list-stripe:#333; /* from CCC */
-    --help-shadow2:#000;
+    --help-shadow2:#333;
   }
   textarea.list {background-image: url("bg_line24d.png");}
   .emojis { opacity:60%; }
 }
 
-html, body, table { 
+html, body, table, .tableHolder { 
   height:100%; 
   width:100%;
   margin:0;
   padding:0
+}
+.tableHolder {
+background-color: var(--table-border);
 }
 table, tr, td { 
   border:5px solid var(--table-border);
@@ -78,10 +75,19 @@ table, tr, td {
   vertical-align:top
 }
 table { 
-  border-collapse: collapse; 
+  border-collapse: separate; 
+  border-spacing: 0;
   font-size:2rem;
   color: var(--table);
   font-family:sans-serif;
+}
+td {
+ border-radius:12px; 
+ box-shadow:0 0 18px var(--table-border);
+}
+body,textarea,td {
+  background:var(--body-bg);
+  color:var(--textarea);
 }
 #dreams-cell { 
   height:33%;
@@ -126,7 +132,6 @@ table {
 }
 
 button { 
-  background-color:var(--button-bg);
   border-radius:50%;
   padding:5px;
   border:none;
@@ -156,11 +161,6 @@ button:focus, #help_button.active {
   background-color:var(--body-bg);
 }
 
-body,textarea {
-  background:var(--body-bg);
-  color:var(--textarea);
-}
-
 .help_1 {--help-bg-delay:0s;--help-bg-delay-out:0.45s;} 
 .help_dreams {--help-bg-delay:0.15s;--help-bg-delay-out:0.35s;} 
 .help_actions {--help-bg-delay:0.25s;--help-bg-delay-out:0.25s;} 
@@ -180,12 +180,12 @@ body,textarea {
 }
 
 .help:hover::after {
-  opacity:1.0;
-  cursor:pointer;
+   opacity:1.0;
+   cursor:pointer;
 }
 
 .help.hide:hover {
-cursor:default;
+   cursor:default;
 }
 
 .hideable, .help {
@@ -251,6 +251,7 @@ cursor:default;
 </style>
 </head>
 <body>
+<div class='tableHolder'>
 <table>
 <tr>
 
@@ -277,6 +278,7 @@ dreams <span class="emojis">🌈</span>
 - To complete your specific goals"></textarea></td>
 </tr>
 </table>
+</div>
 <div class="boxContainer">
   <div class="box">
     <button onclick='undo();' title='undo clear (restore page) hideable' id='undo' class='hide' >🤭 undo</button>

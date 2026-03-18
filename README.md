@@ -1,6 +1,8 @@
 # dgaf - dreams-goals-actions-fears
 
-This is a simple tool i've used for over a decade, whenever i find myself fully blocked 🧱.
+This is a simple tool i've used for over 25 years, whenever i find myself fully and absolutely blocked on a task 🧱.
+
+
 
 ## [**try it online** &rarr;](https://dgaf.secretgeek.net)
 
@@ -33,3 +35,12 @@ The first three boxes are just for show: it's in the **Fears** 💀 area that yo
 
 
 
+## Long and illustrious history
+
+- I started using this around 1995, inspired by a conversation about "stuckness", related to ideas from "Zen and the art of motorcycle maintenance"
+- I first put a version online around 2002 -- <https://wiki.c2.com/?ListYourWayOutOfStuckness>
+- And blogged about it in June 2004 -- <https://secretgeek.net/procrastless>
+- It reached its peaked of cool when Merlin Mann's "43 Folders" blogged about it in October 2004 -- <https://www.43folders.com/2004/10/24/fast-way-to-get-unstuck>
+- And I blogged on it again in Nov 2004. https://secretgeek.net/stuckness_delicious
+- Looks like I made this subdomain'd version around 2019
+- And I've added dark mode in around 2023.
