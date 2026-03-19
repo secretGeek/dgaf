@@ -294,12 +294,6 @@ function save() {
 	for(const l of lists) { setItem(l);}
 }
 
-function load() {
-	for(const l of lists) { 
-		var value = localStorage.getItem(l);
-		if (value != null && value != undefined) $id(l).value = value;
-	}
-}
 var prev = {};
 
 function clear1() {
@@ -329,15 +323,6 @@ function $id(id) {
 	return document.getElementById(id);
 }
 
-start();
-
-function start() {
-	load();
-	for(const l of lists) { 
-		$id(l).addEventListener("input", () => setItem(l));
-	}
-	for(const hell of $(".help")) { hell.addEventListener("click", () => toggleHelp());}
-}
 
 function setItem(id) {
 	localStorage.setItem(id, $id(id).value);
@@ -357,6 +342,24 @@ function toggleHelp() {
 	}
   $id("help_button").classList.toggle('active');
 }
+
+function load() {
+	for(const l of lists) { 
+		var value = localStorage.getItem(l);
+		if (value != null && value != undefined) $id(l).value = value;
+	}
+}
+
+function start() {
+	load();
+	for(const l of lists) { 
+		$id(l).addEventListener("input", () => setItem(l));
+	}
+	for(const hell of $(".help")) { hell.addEventListener("click", () => toggleHelp());}
+}
+
+// ensure this is the last line of the script
+start();
 </script>
 </body>
 </html>
